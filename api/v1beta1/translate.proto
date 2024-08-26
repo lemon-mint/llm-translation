@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package translate.v1beta1;
+package api.v1beta1;
 
-option go_package = "github.com/lemon-mint/llm-translation/proto/translate/v1beta1;translatev1beta1";
+option go_package = "github.com/lemon-mint/llm-translation/api/v1beta1;apiv1beta1";
 
 message HealthzRequest {}
 
@@ -14,5 +14,4 @@ message HealthzResponse {
 
 service TranslationService {
   rpc Healthz(HealthzRequest) returns (HealthzResponse);
-
 }
