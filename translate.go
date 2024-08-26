@@ -131,7 +131,8 @@ func translate(ctx context.Context, model llm.Model, text string, from, to apiv1
 		return "", err
 	}
 
-	output := strings.TrimPrefix(llmtools.TextFromContents(stream.Content), "<input>")
+	output := strings.TrimSpace(llmtools.TextFromContents(stream.Content))
+	output = strings.TrimPrefix(output, "<input>")
 	output = strings.TrimSuffix(output, "</input>")
 
 	output = strings.TrimSpace(output)
