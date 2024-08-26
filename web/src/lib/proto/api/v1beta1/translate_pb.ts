@@ -229,6 +229,11 @@ export class LLMOptions extends Message<LLMOptions> {
    */
   credentials?: LLMCredentials;
 
+  /**
+   * @generated from field: string model = 30;
+   */
+  model = "";
+
   constructor(data?: PartialMessage<LLMOptions>) {
     super();
     proto3.util.initPartial(data, this);
@@ -239,6 +244,7 @@ export class LLMOptions extends Message<LLMOptions> {
   static readonly fields: FieldList = proto3.util.newFieldList(() => [
     { no: 10, name: "provider", kind: "enum", T: proto3.getEnumType(LLMOptions_Provider) },
     { no: 20, name: "credentials", kind: "message", T: LLMCredentials, opt: true },
+    { no: 30, name: "model", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LLMOptions {
@@ -286,6 +292,11 @@ export enum LLMOptions_Provider {
    * @generated from enum value: ANTHROPIC = 4;
    */
   ANTHROPIC = 4,
+
+  /**
+   * @generated from enum value: OPENROUTER = 5;
+   */
+  OPENROUTER = 5,
 }
 // Retrieve enum metadata with: proto3.getEnumType(LLMOptions_Provider)
 proto3.util.setEnumType(LLMOptions_Provider, "api.v1beta1.LLMOptions.Provider", [
@@ -294,6 +305,7 @@ proto3.util.setEnumType(LLMOptions_Provider, "api.v1beta1.LLMOptions.Provider", 
   { no: 2, name: "AISTUDIO" },
   { no: 3, name: "OPENAI" },
   { no: 4, name: "ANTHROPIC" },
+  { no: 5, name: "OPENROUTER" },
 ]);
 
 /**
@@ -342,6 +354,55 @@ export class TranslateRequest extends Message<TranslateRequest> {
 
   static equals(a: TranslateRequest | PlainMessage<TranslateRequest> | undefined, b: TranslateRequest | PlainMessage<TranslateRequest> | undefined): boolean {
     return proto3.util.equals(TranslateRequest, a, b);
+  }
+}
+
+/**
+ * @generated from message api.v1beta1.TranslateResponse
+ */
+export class TranslateResponse extends Message<TranslateResponse> {
+  /**
+   * @generated from field: bool success = 10;
+   */
+  success = false;
+
+  /**
+   * @generated from field: string translated_text = 20;
+   */
+  translatedText = "";
+
+  /**
+   * @generated from field: api.v1beta1.Language target_language = 30;
+   */
+  targetLanguage = Language.UNSPECIFIED;
+
+  constructor(data?: PartialMessage<TranslateResponse>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "api.v1beta1.TranslateResponse";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 10, name: "success", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 20, name: "translated_text", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 30, name: "target_language", kind: "enum", T: proto3.getEnumType(Language) },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TranslateResponse {
+    return new TranslateResponse().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): TranslateResponse {
+    return new TranslateResponse().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TranslateResponse {
+    return new TranslateResponse().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: TranslateResponse | PlainMessage<TranslateResponse> | undefined, b: TranslateResponse | PlainMessage<TranslateResponse> | undefined): boolean {
+    return proto3.util.equals(TranslateResponse, a, b);
   }
 }
 

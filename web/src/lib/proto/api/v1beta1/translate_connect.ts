@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { HealthzRequest, HealthzResponse } from "./translate_pb.js";
+import { HealthzRequest, HealthzResponse, TranslateRequest, TranslateResponse } from "./translate_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -19,6 +19,15 @@ export const TranslationService = {
       name: "healthz",
       I: HealthzRequest,
       O: HealthzResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc api.v1beta1.TranslationService.translate
+     */
+    translate: {
+      name: "translate",
+      I: TranslateRequest,
+      O: TranslateResponse,
       kind: MethodKind.Unary,
     },
   }

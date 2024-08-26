@@ -23,10 +23,12 @@ message LLMOptions {
     AISTUDIO = 2;
     OPENAI = 3;
     ANTHROPIC = 4;
+    OPENROUTER = 5;
   }
 
   Provider provider = 10;
   optional LLMCredentials credentials = 20;
+  string model = 30;
 }
 
 enum Language {
@@ -52,6 +54,13 @@ message TranslateRequest {
   LLMOptions options = 30;
 }
 
+message TranslateResponse {
+  bool success = 10;
+  string translated_text = 20;
+  Language target_language = 30;
+}
+
 service TranslationService {
   rpc healthz(HealthzRequest) returns (HealthzResponse);
+  rpc translate(TranslateRequest) returns (TranslateResponse);
 }
