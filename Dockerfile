@@ -23,7 +23,7 @@ FROM gcr.io/distroless/static-debian12:latest
 WORKDIR /
 COPY --from=build /work/main.exe /main.exe
 
-ENV PORT=8080
-EXPOSE 8080
+ENV PORT=14402
+EXPOSE 14402
 
 ENTRYPOINT [ "/main.exe" ]

@@ -1,0 +1,10 @@
+services:
+  llm_translation:
+    image: llm-translation:latest
+    container_name: llm-translation
+    restart: always
+    networks:
+      - default
+    ports:
+    - 14402:14402
+    env_file: .env
