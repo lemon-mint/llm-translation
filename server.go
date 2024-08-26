@@ -70,6 +70,10 @@ func (s *Server) Translate(
 		case apiv1beta1.LLMOptions_AISTUDIO:
 			provider = "aistudio"
 			options = append(options, pconf.WithAPIKey(req.Msg.Options.Credentials.ApiKey))
+		case apiv1beta1.LLMOptions_OPENROUTER:
+			provider = "openai"
+			options = append(options, pconf.WithAPIKey(req.Msg.Options.Credentials.ApiKey))
+			options = append(options, pconf.WithBaseURL("https://openrouter.ai/api/v1"))
 		default:
 			return nil, ErrUnknownProvider
 		}
