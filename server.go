@@ -11,11 +11,6 @@ import (
 	"github.com/lemon-mint/coord/pconf"
 	apiv1beta1 "github.com/lemon-mint/llm-translation/api/v1beta1"
 	"github.com/lemon-mint/llm-translation/api/v1beta1/apiv1beta1connect"
-
-	_ "github.com/lemon-mint/coord/provider/aistudio"
-	_ "github.com/lemon-mint/coord/provider/anthropic"
-	_ "github.com/lemon-mint/coord/provider/openai"
-	_ "github.com/lemon-mint/coord/provider/vertexai"
 )
 
 type Server struct {
