@@ -12,7 +12,7 @@ COPY go.sum /work/go.sum
 RUN go mod download
 
 ADD . /work
-RUN cd frontend && \
+RUN cd web && \
   $HOME/.bun/bin/bun install && \
   $HOME/.bun/bin/bun run build && \
   cd .. && \
