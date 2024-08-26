@@ -10,9 +10,9 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
-		"@bufbuild/buf": "^1.38.0",
-		"@bufbuild/protoc-gen-es": "^2.0.0",
-		"@connectrpc/protoc-gen-connect-es": "^1.4.0",
+		"@bufbuild/buf": "^1.0.0",
+		"@bufbuild/protoc-gen-es": "^1.0.0",
+		"@connectrpc/protoc-gen-connect-es": "^1.0.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/adapter-static": "^3.0.4",
 		"@sveltejs/kit": "^2.0.0",
@@ -24,8 +24,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@bufbuild/protobuf": "^2.0.0",
-		"@connectrpc/connect": "^1.4.0",
-		"@connectrpc/connect-web": "^1.4.0"
+		"@bufbuild/protobuf": "^1.0.0",
+		"@connectrpc/connect": "^1.0.0",
+		"@connectrpc/connect-web": "^1.0.0"
 	}
 }

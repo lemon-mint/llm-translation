@@ -10,16 +10,29 @@ import (
 	"syscall"
 
 	"github.com/lemon-mint/envaddr"
+	"github.com/lemon-mint/llm-translation/api/v1beta1/apiv1beta1connect"
 	"github.com/rs/zerolog/log"
 	"gopkg.eu.org/envloader"
 )
 
 //go:generate buf generate
 
-//go:embed web/dist
+//go:embed web/dist/**
 var webFS embed.FS
 
 var staticFS fs.FS
+
+type svelteFS struct {
+	fs.FS
+}
+
+func (g *svelteFS) Open(name string) (fs.File, error) {
+	f, err := g.FS.Open(name)
+	if err != nil {
+		return g.FS.Open("index.html")
+	}
+	return f, nil
+}
 
 func main() {
 	envloader.LoadEnvFile(".env")
@@ -35,8 +48,13 @@ func main() {
 		log.Fatal().Err(err).Msg("failed to get static fs, maybe web/dist is not a directory")
 	}
 
+	rpcServer := &Server{}
+
+	path, handler := apiv1beta1connect.NewTranslationServiceHandler(rpcServer)
+
 	mux := http.NewServeMux()
-	mux.Handle("/", http.FileServer(http.FS(staticFS)))
+	mux.Handle("/", http.FileServer(http.FS(&svelteFS{staticFS})))
+	mux.Handle(path, handler)
 
 	srv := &http.Server{
 		Handler: mux,
