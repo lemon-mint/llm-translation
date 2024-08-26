@@ -50,7 +50,9 @@ func main() {
 
 	rpcServer := &Server{}
 
-	path, handler := apiv1beta1connect.NewTranslationServiceHandler(rpcServer)
+	path, handler := apiv1beta1connect.NewTranslationServiceHandler(
+		rpcServer,
+	)
 
 	mux := http.NewServeMux()
 	mux.Handle("/", http.FileServer(http.FS(&svelteFS{staticFS})))

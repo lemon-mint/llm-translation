@@ -34,14 +34,14 @@ const (
 // period.
 const (
 	// TranslationServiceHealthzProcedure is the fully-qualified name of the TranslationService's
-	// Healthz RPC.
-	TranslationServiceHealthzProcedure = "/api.v1beta1.TranslationService/Healthz"
+	// healthz RPC.
+	TranslationServiceHealthzProcedure = "/api.v1beta1.TranslationService/healthz"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
 var (
 	translationServiceServiceDescriptor       = v1beta1.File_api_v1beta1_translate_proto.Services().ByName("TranslationService")
-	translationServiceHealthzMethodDescriptor = translationServiceServiceDescriptor.Methods().ByName("Healthz")
+	translationServiceHealthzMethodDescriptor = translationServiceServiceDescriptor.Methods().ByName("healthz")
 )
 
 // TranslationServiceClient is a client for the api.v1beta1.TranslationService service.
@@ -73,7 +73,7 @@ type translationServiceClient struct {
 	healthz *connect.Client[v1beta1.HealthzRequest, v1beta1.HealthzResponse]
 }
 
-// Healthz calls api.v1beta1.TranslationService.Healthz.
+// Healthz calls api.v1beta1.TranslationService.healthz.
 func (c *translationServiceClient) Healthz(ctx context.Context, req *connect.Request[v1beta1.HealthzRequest]) (*connect.Response[v1beta1.HealthzResponse], error) {
 	return c.healthz.CallUnary(ctx, req)
 }
@@ -109,5 +109,5 @@ func NewTranslationServiceHandler(svc TranslationServiceHandler, opts ...connect
 type UnimplementedTranslationServiceHandler struct{}
 
 func (UnimplementedTranslationServiceHandler) Healthz(context.Context, *connect.Request[v1beta1.HealthzRequest]) (*connect.Response[v1beta1.HealthzResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1beta1.TranslationService.Healthz is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1beta1.TranslationService.healthz is not implemented"))
 }

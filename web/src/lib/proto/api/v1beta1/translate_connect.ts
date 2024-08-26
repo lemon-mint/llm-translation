@@ -13,10 +13,10 @@ export const TranslationService = {
   typeName: "api.v1beta1.TranslationService",
   methods: {
     /**
-     * @generated from rpc api.v1beta1.TranslationService.Healthz
+     * @generated from rpc api.v1beta1.TranslationService.healthz
      */
     healthz: {
-      name: "Healthz",
+      name: "healthz",
       I: HealthzRequest,
       O: HealthzResponse,
       kind: MethodKind.Unary,

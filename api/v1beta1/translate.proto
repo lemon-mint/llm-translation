@@ -12,6 +12,46 @@ message HealthzResponse {
   string version = 3;
 }
 
+message LLMCredentials {
+  string api_key = 1;
+}
+
+message LLMOptions {
+  enum Provider {
+    UNSPECIFIED = 0;
+    SERVER = 1;
+    AISTUDIO = 2;
+    OPENAI = 3;
+    ANTHROPIC = 4;
+  }
+
+  Provider provider = 10;
+  optional LLMCredentials credentials = 20;
+}
+
+enum Language {
+  UNSPECIFIED = 0;
+  ENGLISH = 1;
+  SPANISH = 2;
+  CHINESE = 3;
+  KOREAN = 4;
+  JAPANESE = 5;
+  GERMAN = 6;
+  RUSSIAN = 7;
+  FRENCH = 8;
+  DUTCH = 9;
+  ITALIAN = 10;
+  INDONESIAN = 11;
+  PORTUGUESE = 12;
+  TAIWANESE = 13;
+}
+
+message TranslateRequest {
+  string text = 10;
+  Language target_language = 20;
+  LLMOptions options = 30;
+}
+
 service TranslationService {
-  rpc Healthz(HealthzRequest) returns (HealthzResponse);
+  rpc healthz(HealthzRequest) returns (HealthzResponse);
 }
