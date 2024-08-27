@@ -49,6 +49,10 @@ var exampleMaps = map[[2]apiv1beta1.Language][][2]string{
 		apiv1beta1.Language_KOREAN,
 	}: {
 		{
+			"<h1>The dog chased its tail in circles.</h1>",
+			"<h1>강아지가 자기 꼬리를 쫓아 빙글빙글 돌았다.</h1>",
+		},
+		{
 			`AI has the potential to address some of humanity's most pressing problems — but only if everyone has the tools to build with it. That's why earlier this year we introduced Gemma, a family of lightweight, state-of-the-art open models built from the same research and technology used to create the Gemini models.
 
 Now we’re officially releasing Gemma 2 to researchers and developers globally. Available in both 9 billion (9B) and 27 billion (27B) parameter sizes, Gemma 2 is higher-performing and more efficient at inference than the first generation, with significant safety advancements built in. In fact, at 27B, it offers competitive alternatives to models more than twice its size, delivering the kind of performance that was only possible with proprietary models as recently as December.`,
@@ -56,15 +60,15 @@ Now we’re officially releasing Gemma 2 to researchers and developers globally.
 
 이제 우리는 Gemma 2를 전 세계 연구자와 개발자에게 공식적으로 출시합니다. 90억(9B) 및 270억(27B) 매개변수 크기로 제공되는 Gemma 2는 1세대보다 추론 성능과 효율성이 더 뛰어나며 상당한 안전성 향상이 내장되어 있습니다. 실제로 27B 모델의 경우, 두 배 이상 큰 모델에 대한 경쟁력 있는 대안을 제공하며 불과 최근 12월까지만 해도 독점 모델에서만 가능했던 성능을 제공합니다.`,
 		},
-		{
-			"<h1>The dog chased its tail in circles.</h1>",
-			"<h1>강아지가 자기 꼬리를 쫓아 빙글빙글 돌았다.</h1>",
-		},
 	},
 	{
 		apiv1beta1.Language_KOREAN,
 		apiv1beta1.Language_ENGLISH,
 	}: {
+		{
+			"<h1>강아지가 자기 꼬리를 쫓아 빙글빙글 돌았다.</h1>",
+			"<h1>The dog chased its tail in circles.</h1>",
+		},
 		{
 			`AI는 인류의 가장 시급한 문제를 해결할 수 있는 잠재력을 가지고 있습니다 — 하지만 모든 사람이 이를 기반으로 구축할 수 있는 도구를 가지고 있을 때만 가능합니다. 이것이 바로 올해 초 우리가 Gemini 모델을 만드는 데 사용된 것과 같은 연구 및 기술로 구축된, 가볍고 최첨단의 오픈 모델 제품군인 Gemma를 소개한 이유입니다.
 
@@ -72,10 +76,6 @@ Now we’re officially releasing Gemma 2 to researchers and developers globally.
 			`AI has the potential to address some of humanity's most pressing problems — but only if everyone has the tools to build with it. That's why earlier this year we introduced Gemma, a family of lightweight, state-of-the-art open models built from the same research and technology used to create the Gemini models.
 
 Now we're officially releasing Gemma 2 to researchers and developers globally. Available in both 9 billion (9B) and 27 billion (27B) parameter sizes, Gemma 2 is higher-performing and more efficient at inference than the first generation, with significant safety advancements built in. In fact, at 27B, it offers competitive alternatives to models more than twice its size, delivering the kind of performance that was only possible with proprietary models as recently as December.`,
-		},
-		{
-			"<h1>강아지가 자기 꼬리를 쫓아 빙글빙글 돌았다.</h1>",
-			"<h1>The dog chased its tail in circles.</h1>",
 		},
 	},
 }
@@ -87,7 +87,8 @@ var (
 
 func wrapText(text string, to apiv1beta1.Language) string {
 	toName := getLanguageName(to)
-	return strings.ReplaceAll("Translate the following text into <TARGET_LANGUAGE>:\n\n<text>\n", "<TARGET_LANGUAGE>", toName) + text + "\n</text>"
+	return strings.ReplaceAll("Translate the following text into <TARGET_LANGUAGE>:\n\n<text>\n", "<TARGET_LANGUAGE>", toName) + text + "\n</text>\n\n" +
+		strings.ReplaceAll("Translate the above text inside the \"<text>\" tag into <TARGET_LANGUAGE>.", "<TARGET_LANGUAGE>", toName)
 }
 
 func getPrompt(from, to apiv1beta1.Language) string {
