@@ -13,9 +13,17 @@
   let transport: Transport;
   let client: PromiseClient<typeof TranslationService>;
 
+  function getDefaultOutputLanguage(): string {
+    const lastLanguage = localStorage.getItem("outputLanguage");
+    if (lastLanguage) {
+      return lastLanguage;
+    }
+    return "English";
+  }
+
   let inputText = "";
   let outputText = "";
-  let outputLanguage = "Spanish";
+  let outputLanguage = getDefaultOutputLanguage();
 
   let apiKey = "";
   let apiType = "SERVER";
@@ -32,6 +40,9 @@
     localStorage.setItem("apiKey", apiKey);
     localStorage.setItem("apiType", apiType);
     localStorage.setItem("model", model);
+
+    // Store the output language
+    localStorage.setItem("outputLanguage", outputLanguage);
   }
 
   function loadCredentials() {
@@ -193,7 +204,7 @@
       </div>
       <div class="translation-box">
         <h2>
-          <select bind:value={outputLanguage}>
+          <select bind:value={outputLanguage} on:change={storeCredentials}>
             {#each languageOptions as language}
               <option value={language}>{language}</option>
             {/each}
@@ -221,7 +232,7 @@
       <div class="advanced-settings">
         <div class="setting">
           <label for="apiType">API Type:</label>
-          <select id="apiType" bind:value={apiType}>
+          <select id="apiType" bind:value={apiType} on:change={storeCredentials}>
             <option value="SERVER">Server</option>
             <option value="AISTUDIO">AI Studio</option>
             <option value="OPENAI">OpenAI</option>
@@ -235,6 +246,7 @@
             type="password"
             id="apiKey"
             bind:value={apiKey}
+            on:change={storeCredentials}
             placeholder="Enter API Key"
           />
         </div>
@@ -244,6 +256,7 @@
             type="text"
             id="model"
             bind:value={model}
+            on:change={storeCredentials}
             placeholder="Enter Model Name"
           />
         </div>
