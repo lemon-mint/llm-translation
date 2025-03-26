@@ -9,7 +9,7 @@ require (
 	github.com/rs/zerolog v1.34.0
 	google.golang.org/protobuf v1.36.6
 	gopkg.eu.org/envloader v1.1.0
-	gosuda.org/deeplingua v0.0.0-20250217141656-ae76ea7e1875
+	gosuda.org/deeplingua v0.0.0-20250326012502-08344e560524
 )
 
 require (
